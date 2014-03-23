@@ -7,14 +7,16 @@ class Nodes
 {
     public:
         Nodes();
+        ~Nodes();
         Node **getList();
+        Node *getNode(int no = 0);
         void add(Node *node);
         void showTable();
         void listOfNodes();
         int getAmount();
         int maxFrom();
         int maxTo();
-        Node getNode(int no = 0);
+        int verse(int i);
     private:
         void maxFrom(int max);
         void maxTo(int max);
@@ -22,16 +24,18 @@ class Nodes
         //List of nodes
         Node **stackOfNodes;
         // Amount of added nodes
-        int amount = 0;
+        int amount;
         // Maximum Node.from value
-        int from = 0;
+        int from;
         // Maximum Node.to value
-        int to = 0;
+        int to;
         // Dummy node is returned by getNode(no) when
         // Node is not found in listOfNodes
-        Node *nodeDummy = new Node();
+        Node *nodeDummy;
         // This contains begining of the verses
         int *startOfVerses;
+        // Verse where last was addes node
+        int actualVerse;
 };
 
 #endif // NODES_H

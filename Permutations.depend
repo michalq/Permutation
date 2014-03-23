@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395563414 source:/home/michal/Programowanie/Permutations/main.cpp
+1395582933 source:/home/michal/Programowanie/Permutations/main.cpp
 	<iostream>
 	<stdio.h>
 	"Table.h"
@@ -9,18 +9,20 @@
 
 1395323075 /home/michal/Programowanie/Permutations/include/Table.h
 
-1395561670 /home/michal/Programowanie/Permutations/include/Permutations.h
+1395568891 /home/michal/Programowanie/Permutations/include/Permutations.h
 	"Nodes.h"
+	"Permutation.h"
 
-1395561685 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
+1395582768 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
 	"Permutations.h"
 	"Nodes.h"
+	<stdio.h>
 
 1395335933 source:/home/michal/Programowanie/Permutations/src/Table.cpp
 	<stdio.h>
 	"Table.h"
 
-1395562674 /home/michal/Programowanie/Permutations/include/Nodes.h
+1395582490 /home/michal/Programowanie/Permutations/include/Nodes.h
 	"Node.h"
 
 1395486574 /home/michal/Programowanie/Permutations/include/Node.h
@@ -28,8 +30,15 @@
 1395486750 source:/home/michal/Programowanie/Permutations/src/Node.cpp
 	"Node.h"
 
-1395562917 source:/home/michal/Programowanie/Permutations/src/Nodes.cpp
+1395582862 source:/home/michal/Programowanie/Permutations/src/Nodes.cpp
 	"Nodes.h"
 	"Node.h"
 	<stdio.h>
+
+1395568621 /home/michal/Programowanie/Permutations/include/Permutation.h
+	"Node.h"
+
+1395568637 source:/home/michal/Programowanie/Permutations/src/Permutation.cpp
+	"Permutation.h"
+	"Node.h"
 

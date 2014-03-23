@@ -10,6 +10,17 @@ Nodes::Nodes()
     // The 200 value is temporarily, it should be generated automatically
     this->stackOfNodes = new Node * [200];
     this->startOfVerses = new int [200];
+    actualVerse = 0;
+    nodeDummy = new Node();
+    amount = 0;
+    from = 0;
+    to = 0;
+}
+
+Nodes::~Nodes()
+{
+    delete this->startOfVerses;
+    delete this->stackOfNodes;
 }
 
 /**
@@ -19,8 +30,15 @@ Nodes::Nodes()
  */
 void Nodes::add(Node *node)
 {
-    this->stackOfNodes[amount] = node;
-    this->amount++;
+    this->stackOfNodes[this->amount] = node;
+    // Checking verses
+    if (this->actualVerse != node->getFrom())
+    {
+        this->actualVerse = node->getFrom();
+        this->startOfVerses[this->actualVerse] = this->amount;
+    }
+
+    // Looking for maxFrom and maxTo
     if (node->getFrom() > this->maxFrom())
     {
         this->maxFrom(node->getFrom());
@@ -30,11 +48,22 @@ void Nodes::add(Node *node)
     {
         this->maxTo(node->getTo());
     }
+    this->amount++;
+}
+
+/**
+ * Returns from what the number (to) begins the verse
+ *
+ * @param   int             Line number
+ */
+int Nodes::verse(int i)
+{
+    return this->startOfVerses[i];
 }
 
 /**
  *
- * @return  Node **         Stack of nodes
+ * @return  Node    **      Stack of nodes
  */
 Node **Nodes::getList()
 {
@@ -46,12 +75,12 @@ Node **Nodes::getList()
  * @param   int     no      Number of element
  * @return  Node            Returns specified node
  */
-Node Nodes::getNode(int no)
+Node *Nodes::getNode(int no)
 {
     if (no < 0 || no >= this->amount)
-        return *nodeDummy;
+        return nodeDummy;
 
-    return *this->stackOfNodes[no];
+    return this->stackOfNodes[no];
 }
 
 /**
@@ -119,22 +148,22 @@ void Nodes::showTable()
 
     for (int i = 0, k = 1; i < amount; i++)
     {
-        if (this->getNode(i - 1).getStatus() && this->getNode(i - 1).getFrom() != this->getNode(i).getFrom())
+        if (this->getNode(i - 1)->getStatus() && this->getNode(i - 1)->getFrom() != this->getNode(i)->getFrom())
         {
             printf("\n%i |", k);
-            tabAmount = this->getNode(i).getTo();
+            tabAmount = this->getNode(i)->getTo();
             k++;
         }
         else
         {
-            tabAmount = this->getNode(i).getTo() - this->getNode(i - 1).getTo();
+            tabAmount = this->getNode(i)->getTo() - this->getNode(i - 1)->getTo();
         }
         for (int j = 0; j < tabAmount - 1; j++)
         {
             printf("   |");
         }
 
-        printf(" %c |", this->getNode(i).getName(), tabAmount);
+        printf(" %c |", this->getNode(i)->getName(), tabAmount);
     }
     printf("\n");
 }
@@ -151,10 +180,10 @@ void Nodes::listOfNodes()
         printf(
             "%i. Name: %c, from: %i, to: %i, weight: %i\n",
             i,
-            this->getNode(i).getName(),
-            this->getNode(i).getFrom(),
-            this->getNode(i).getTo(),
-            this->getNode(i).getWeight()
+            this->getNode(i)->getName(),
+            this->getNode(i)->getFrom(),
+            this->getNode(i)->getTo(),
+            this->getNode(i)->getWeight()
         );
     }
 }
