@@ -23,40 +23,58 @@ void Permutations::generatePermutations()
 {
     int versesAmount = this->nodes->maxFrom();
     int *verses = new int [versesAmount];
-    Permutation *test = new Permutation(5);
-
+    int *verses_cache = new int [versesAmount];
+    Permutation *test = new Permutation(versesAmount);
+    // Init
     for (int i = 1; i <= versesAmount; i++)
     {
         verses[i] = this->nodes->verse(i);
-        test->addNode(this->nodes->getNode(verses[i]));
-        printf("\nStatus %c: %s",this->nodes->getNode(verses[i])->getName() , test->checkPossibilityForce()?"true":"false");
+        verses_cache[i] = this->nodes->verse(i);
     }
-
-    /*
-    test->addNode(this->nodes->getNode(0)); // a
-
-    test->addNode(this->nodes->getNode(3)); // d
-    printf("\n%i Status: %s",this->nodes->verse(2) , test->checkPossibilityForce()?"true":"false");
-    test->addNode(this->nodes->getNode(8)); // i
-    printf("\n%i Status: %s",this->nodes->verse(3) , test->checkPossibilityForce()?"true":"false");
-    test->addNode(this->nodes->getNode(10)); // k
-    printf("\n%i Status: %s",this->nodes->verse(4) , test->checkPossibilityForce()?"true":"false");
-    test->addNode(this->nodes->getNode(14)); // o
-    printf("\n%i Status: %s",this->nodes->verse(5) , test->checkPossibilityForce()?"true":"false");
-    */
-    /*for (int i = 0; i < 5; i++)
+    int j = 1;
+    for (this->ite = 1; ;)
     {
-        if (test->checkPossibility())
+        test->push(this->nodes->getNode(verses_cache[this->ite]));
+
+        if (test->checkLast() && this->ite == versesAmount)
         {
-            this->addCombination(test);
+            // Ostatni element będzie prawidłowy sprawdzamy kolejny element na tej samej lini
+            // add saving ...
+            printf("%i. ", j++);
+            test->writeNode();
+        }
+
+        //
+        if (!test->checkLast() || this->ite == versesAmount)
+        {
+            if ( ! this->recursiveToTop(test, verses_cache, verses))
+            {
+                break;
+            }
         }
         else
         {
-            delete test;
-            continue;
+            // If everything is ok, lets go to the nect line
+            this->ite++;
         }
-    }*/
+    }
     delete verses;
+}
+
+bool Permutations::recursiveToTop(Permutation *test, int *verses_cache, int *verses)
+{
+    test->pop(); // Deleting last object
+    verses_cache[ite]++; // Checking another one object in line
+    if (this->nodes->getNode(verses_cache[ite])->getFrom() != this->nodes->getNode(verses[ite])->getFrom())
+    {
+        if (this->ite == 1)
+            return false;
+
+        verses_cache[this->ite] = verses[this->ite];
+        this->ite--; // Back one line to up
+        return this->recursiveToTop(test, verses_cache, verses);
+
+    }
 }
 
 void Permutations::addCombination(Permutation *permutation)

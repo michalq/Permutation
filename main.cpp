@@ -12,12 +12,8 @@
 
 int main(void)
 {
-    //Table table = Table(6,6);
-    //Permutations p = Permutations(&table);
-
-    //table.appendData(true);
-
     Nodes nodes = Nodes();
+
     nodes.add(new Node('a', 1, 1));//0
     nodes.add(new Node('b', 1, 3));//1
     nodes.add(new Node('c', 1, 4));//2

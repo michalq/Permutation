@@ -11,6 +11,7 @@ class Permutations
         ~Permutations();
         void addCombination(Permutation *permutation);
         void generatePermutations();
+        bool recursiveToTop(Permutation *test, int *verses_cache, int *verses);
     private:
         /**
          * Stores reference to Nodes object
@@ -18,6 +19,7 @@ class Permutations
         Nodes *nodes;
         Permutation **combinations;
         int position = 0;
+        int ite;
 };
 
 #endif // PERMUTATIONS_H

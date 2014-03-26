@@ -16,9 +16,13 @@ class Permutation
         int getAmount();
         int getPosition();
         bool getStatus();
-        bool addNode(Node *node);
+        bool push(Node *node);
+        void pop();
         bool checkPossibility();
         bool checkPossibilityForce();
+        bool checkLast();
+        void writeNode();
+        void writeColumns();
     private:
         // Nodes in this combination
         Node **nodes;
@@ -28,8 +32,8 @@ class Permutation
         int position = 1;
         // This tell us if there is full combination (amount == position)
         int isFull = false;
-        //
-        bool *columns;
+        // Amount of elements per column
+        int *columns;
         // Returns whther it is possible to create permutation
         bool isPossible = true;
 };

@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Permutation.h"
 #include "Node.h"
 
@@ -7,10 +8,11 @@ Permutation::Permutation(int amount)
 {
     this->setAmount(amount);
     this->nodes = new Node * [this->amount];
-    this->columns = new bool [this->amount];
-    for (int i = 1; i < this->amount; i++)
+    this->columns = new int [this->amount];
+
+    for (int i = 1; i <= this->amount; i++)
     {
-        this->columns[i] = false;
+        this->columns[i] = 0;
     }
 }
 
@@ -30,12 +32,18 @@ bool Permutation::checkPossibility()
     return false;
 }
 
-bool Permutation::checkPossibilityForce()
+/**
+ * Returns whether is last node correct choosen
+ */
+bool Permutation::checkLast()
 {
-    return this->isPossible;
+    return !(this->columns[this->nodes[this->position-1]->getTo()] > 1);
 }
 
-bool Permutation::addNode(Node *node)
+/**
+ *
+ */
+bool Permutation::push(Node *node)
 {
     if (this->getPosition() == this->getAmount())
     {
@@ -43,19 +51,36 @@ bool Permutation::addNode(Node *node)
         return false;
     }
 
-    this->nodes[position] = node;
-    if (this->columns[node->getTo()])
-    {
-        this->isPossible = false;
-    }
-    else
-    {
-        this->columns[node->getTo()] = true;
-    }
-    position++;
-    return true;
+    this->nodes[node->getFrom()] = node;
+    this->columns[node->getTo()]++;
+    this->position++;
+    return this->checkLast();
 }
 
+void Permutation::pop()
+{
+    this->position -= 1;
+    int cache = this->nodes[this->position]->getTo();
+    this->columns[cache] -= 1;
+}
+
+void Permutation::writeNode()
+{
+    for (int i = 1; i < this->getAmount(); i++)
+    {
+        printf("%c, ", this->nodes[i]->getName());
+    }
+    printf("\n");
+}
+
+void Permutation::writeColumns()
+{
+    for (int i = 1; i < this->getAmount(); i++)
+    {
+        printf("%i, ", this->columns[i]);
+    }
+    printf("\n");
+}
 
 bool Permutation::getStatus()
 {
