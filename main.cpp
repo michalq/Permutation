@@ -1,7 +1,7 @@
 #include<iostream>
 #include<stdio.h>
-#include "Table.h"
-#include "Permutations.h"
+#include "Permutations/Generator.h"
+//#include "Permutations.h"
 #include "Nodes.h"
 #include "Node.h"
 
@@ -13,7 +13,6 @@
 int main(void)
 {
     Nodes nodes = Nodes();
-
     nodes.add(new Node('a', 1, 1));//0
     nodes.add(new Node('b', 1, 3));//1
     nodes.add(new Node('c', 1, 4));//2
@@ -32,8 +31,11 @@ int main(void)
     nodes.listOfNodes();
     nodes.showTable();
 
-    Permutations permutations = Permutations(&nodes);
-    permutations.generatePermutations();
+    Permutations::Generator generator = Permutations::Generator(&nodes);
+    generator.init();
+
+    //Permutations permutations = Permutations(&nodes);
+    //permutations.generatePermutations();
 
     return 0;
 }
