@@ -15,11 +15,12 @@ namespace Permutations {
             void init();
             bool recursiveToTop(Permutation *test, int *verses_cache, int *verses);
             void setContainer(Permutations *permutations);
+            Permutations *getPermutations();
         private:
             // Stores reference to Nodes object
             Nodes *nodes;
             // Container that store found permutations
-            Permutations *container;
+            Permutations *permutations;
             // Iterator
             int ite;
     };

@@ -9,8 +9,11 @@ namespace Permutations {
         public:
             Permutations();
             void add(Permutation *permutation);
+            void test(); // TO REMOVE
         protected:
         private:
+            int counter;
+            Permutation *container;
     };
 }
 

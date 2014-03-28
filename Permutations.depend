@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1395949104 source:/home/michal/Programowanie/Permutations/main.cpp
+1395955410 source:/home/michal/Programowanie/Permutations/main.cpp
 	<iostream>
 	<stdio.h>
 	"Permutations/Generator.h"
@@ -12,10 +12,9 @@
 	"Nodes.h"
 	"Permutation.h"
 
-1395947759 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
-	"Permutations.h"
-	"Nodes.h"
-	<stdio.h>
+1396011613 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
+	"Permutations/Permutations.h"
+	"Permutation.h"
 
 1395335933 source:/home/michal/Programowanie/Permutations/src/Table.cpp
 	<stdio.h>
@@ -42,17 +41,17 @@
 	"Permutation.h"
 	"Node.h"
 
-1395951463 /home/michal/Programowanie/Permutations/include/Permutations/Generator.h
+1395954437 /home/michal/Programowanie/Permutations/include/Permutations/Generator.h
 	"Nodes.h"
 	"Permutation.h"
 	"Permutations/Permutations.h"
 
-1395951520 source:/home/michal/Programowanie/Permutations/src/Generator.cpp
+1395954858 source:/home/michal/Programowanie/Permutations/src/Generator.cpp
 	"Permutations/Generator.h"
 	"Permutations/Permutations.h"
 	"Nodes.h"
 	<stdio.h>
 
-1395951338 /home/michal/Programowanie/Permutations/include/Permutations/Permutations.h
+1395988457 /home/michal/Programowanie/Permutations/include/Permutations/Permutations.h
 	"Permutation.h"
 

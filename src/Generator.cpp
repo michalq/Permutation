@@ -11,11 +11,17 @@ void Permutations::Generator::setNodes(Nodes *nodes)
 Permutations::Generator::Generator(Nodes *nodes)
 {
     this->setNodes(nodes);
+    this->permutations = new Permutations();
 }
 
 void Permutations::Generator::setContainer(Permutations *container)
 {
-    this->container = container;
+    this->permutations = container;
+}
+
+Permutations::Permutations *Permutations::Generator::getPermutations()
+{
+    return this->permutations;
 }
 
 void Permutations::Generator::init()
@@ -30,7 +36,6 @@ void Permutations::Generator::init()
         verses[i] = this->nodes->verse(i);
         verses_cache[i] = this->nodes->verse(i);
     }
-    int j = 1;
     this->ite = 1;
     while (true)
     {
@@ -38,9 +43,8 @@ void Permutations::Generator::init()
 
         if (test->checkLast() && this->ite == versesAmount)
         {
-            // add saving ...
-            printf("%i. ", j++);
-            test->writeNode();
+            // Saving good permutation
+            this->permutations->add(test);
         }
 
         //
