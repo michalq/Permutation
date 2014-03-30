@@ -136,9 +136,8 @@ int Nodes::getAmount()
 /**
  * Returns human readable table represantation of nodes
  */
-void Nodes::showTable()
+void Nodes::table()
 {
-    printf("\nTable representation:\n\n  ");
     int amount = this->getAmount();
     int tabAmount;
     for (int i = 1; i <= this->maxTo(); i++)
@@ -173,7 +172,6 @@ void Nodes::showTable()
  */
 void Nodes::listOfNodes()
 {
-    printf("\nListof nodes:\n\n");
     int amount = this->getAmount();
     for (int i = 0; i < amount; i++)
     {

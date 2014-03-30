@@ -10,7 +10,8 @@ class Permutation
 {
     public:
         Permutation(int amount);
-        Permutation();
+        Permutation(void);
+        Permutation(const Permutation & layout);
         ~Permutation();
         void setAmount(int amount);
         int getAmount();
@@ -21,8 +22,11 @@ class Permutation
         bool checkPossibility();
         bool checkPossibilityForce();
         bool checkLast();
+        Permutation copy(Permutation *layout);
+
         void writeNode();
         void writeColumns();
+        void table();
     private:
         // Nodes in this combination
         Node **nodes;

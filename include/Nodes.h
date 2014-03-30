@@ -11,7 +11,7 @@ class Nodes
         Node **getList();
         Node *getNode(int no = 0);
         void add(Node *node);
-        void showTable();
+        void table();
         void listOfNodes();
         int getAmount();
         int maxFrom();

@@ -1,7 +1,6 @@
 #include "Permutations/Generator.h"
 #include "Permutations/Permutations.h"
 #include "Nodes.h"
-#include <stdio.h>
 
 void Permutations::Generator::setNodes(Nodes *nodes)
 {
@@ -24,6 +23,10 @@ Permutations::Permutations *Permutations::Generator::getPermutations()
     return this->permutations;
 }
 
+/**
+ * JESUS CHRIST! YOU NEED TO OPTIMIZE THESE METHODS BELOW!
+ * ... but dont hurry
+ */
 void Permutations::Generator::init()
 {
     int versesAmount = this->nodes->maxFrom();
@@ -44,7 +47,8 @@ void Permutations::Generator::init()
         if (test->checkLast() && this->ite == versesAmount)
         {
             // Saving good permutation
-            this->permutations->add(test);
+            Permutation *cache = new Permutation();
+            this->permutations->add(cache->copy(test));
         }
 
         //
@@ -60,6 +64,8 @@ void Permutations::Generator::init()
             this->ite++;
         }
     }
+    //test->push(this->nodes->getNode(12));
+    delete test;
     delete verses;
     delete verses_cache;
 }

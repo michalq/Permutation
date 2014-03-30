@@ -8,12 +8,15 @@ namespace Permutations {
     {
         public:
             Permutations();
-            void add(Permutation *permutation);
+            void add(Permutation permutation);
             void test(); // TO REMOVE
+            Permutation *container;
+            void table();
+            int det();
+            void detEquationRPN();
         protected:
         private:
             int counter;
-            Permutation *container;
     };
 }
 
