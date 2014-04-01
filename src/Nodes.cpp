@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Nodes.h"
 #include "Node.h"
 #include<stdio.h>

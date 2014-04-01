@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Permutations/Generator.h"
 #include "Permutations/Permutations.h"
 #include "Nodes.h"
@@ -11,6 +14,7 @@ Permutations::Generator::Generator(Nodes *nodes)
 {
     this->setNodes(nodes);
     this->permutations = new Permutations();
+    this->branch = -1;
 }
 
 void Permutations::Generator::setContainer(Permutations *container)
@@ -48,6 +52,16 @@ void Permutations::Generator::init()
         {
             // Saving good permutation
             Permutation *cache = new Permutation();
+
+            if (this->branch == -1)
+            {
+                test->setBranchBegin(1);
+            }
+            else
+            {
+                test->setBranchBegin(this->branch);
+                this->branch = -1;
+            }
             this->permutations->add(cache->copy(test));
         }
 
@@ -56,7 +70,9 @@ void Permutations::Generator::init()
         {
 
             if ( ! this->recursiveToTop(test, verses_cache, verses))
+            {
                 break;
+            }
         }
         else
         {
@@ -64,7 +80,6 @@ void Permutations::Generator::init()
             this->ite++;
         }
     }
-    //test->push(this->nodes->getNode(12));
     delete test;
     delete verses;
     delete verses_cache;
@@ -75,7 +90,7 @@ bool Permutations::Generator::recursiveToTop(Permutation *test, int *verses_cach
     // Deleting last object
     test->pop();
     // Checking another one object in line
-    verses_cache[ite]++;
+    verses_cache[this->ite]++;
     // Line is over?
     if (this->nodes->getNode(verses_cache[ite])->getFrom() != this->nodes->getNode(verses[ite])->getFrom())
     {
@@ -87,6 +102,11 @@ bool Permutations::Generator::recursiveToTop(Permutation *test, int *verses_cach
         verses_cache[this->ite] = verses[this->ite];
         // Back one line up
         this->ite--;
+        // Set branching out on this position
+        if (this->ite < this->branch || this->branch == -1)
+        {
+            this->branch = this->ite;
+        }
         // And check another one line up
         return this->recursiveToTop(test, verses_cache, verses);
     }

@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Permutation.h"
 
 #ifndef PERMUTATIONS_H
@@ -9,7 +12,6 @@ namespace Permutations {
         public:
             Permutations();
             void add(Permutation permutation);
-            void test(); // TO REMOVE
             Permutation *container;
             void table();
             int det();

@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Nodes.h"
 #include "Permutation.h"
 #include "Permutations/Permutations.h"
@@ -21,8 +24,10 @@ namespace Permutations {
             Nodes *nodes;
             // Container that store found permutations
             Permutations *permutations;
-            // Iterator
+            // Iterator (temp)
             int ite;
+            // Branch tell us where branch out appears (temp)
+            int branch;
     };
 }
 

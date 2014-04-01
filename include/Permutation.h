@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Node.h"
 #ifndef PERMUTATION_H
 #define PERMUTATION_H
@@ -23,6 +26,10 @@ class Permutation
         bool checkPossibilityForce();
         bool checkLast();
         Permutation copy(Permutation *layout);
+        int getSign();
+        int getBranchBegin();
+        void setBranchBegin(int branchBegin);
+        Node *getNode(int i);
 
         void writeNode();
         void writeColumns();
@@ -40,6 +47,10 @@ class Permutation
         int *columns;
         // Returns whther it is possible to create permutation
         bool isPossible = true;
+        // Sign of permutation
+        int sign;
+        //
+        int branchBegin;
 };
 
 #endif // PERMUTATION_H

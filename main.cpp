@@ -1,9 +1,11 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include <stdio.h>
 #include "Permutations/Generator.h"
 
 /**
  * - Do something with dynamically generated tables in Nodes.cpp and Permutaions.cpp
- * -
  */
 
 int main(void)
@@ -31,15 +33,16 @@ int main(void)
     // Permutations object
     Permutations::Permutations *permutations = generator.getPermutations();
 
-    printf("\n");
+    //printf("\n\List of nodes:\n");
     //nodes.listOfNodes();
+    printf("\n\nTable reresentation:\n");
     nodes.table();
 
+    printf("\n\nAll permutations:");
     permutations->table();
 
-    printf("\nDeterminant: %i\n", permutations->det());
-
-    permutations->test();
+    printf("\nDeterminant:\n");
+    permutations->detEquationRPN();
 
     return 0;
 }

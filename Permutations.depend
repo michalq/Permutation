@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1396214340 source:/home/michal/Programowanie/Permutations/main.cpp
+1396334257 source:/home/michal/Programowanie/Permutations/main.cpp
 	<stdio.h>
 	"Permutations/Generator.h"
 
@@ -9,46 +9,47 @@
 	"Nodes.h"
 	"Permutation.h"
 
-1396214230 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
+1396334266 source:/home/michal/Programowanie/Permutations/src/Permutations.cpp
 	"Permutations/Permutations.h"
 	"Permutation.h"
 	<stdio.h>
+	<stack>
 
 1395335933 source:/home/michal/Programowanie/Permutations/src/Table.cpp
 	<stdio.h>
 	"Table.h"
 
-1396214110 /home/michal/Programowanie/Permutations/include/Nodes.h
+1396215622 /home/michal/Programowanie/Permutations/include/Nodes.h
 	"Node.h"
 
-1395697338 /home/michal/Programowanie/Permutations/include/Node.h
+1396215617 /home/michal/Programowanie/Permutations/include/Node.h
 
-1395697349 source:/home/michal/Programowanie/Permutations/src/Node.cpp
+1396215642 source:/home/michal/Programowanie/Permutations/src/Node.cpp
 	"Node.h"
 
-1396214126 source:/home/michal/Programowanie/Permutations/src/Nodes.cpp
+1396215649 source:/home/michal/Programowanie/Permutations/src/Nodes.cpp
 	"Nodes.h"
 	"Node.h"
 	<stdio.h>
 
-1396211971 /home/michal/Programowanie/Permutations/include/Permutation.h
+1396303570 /home/michal/Programowanie/Permutations/include/Permutation.h
 	"Node.h"
 
-1396214466 source:/home/michal/Programowanie/Permutations/src/Permutation.cpp
+1396303603 source:/home/michal/Programowanie/Permutations/src/Permutation.cpp
 	<stdio.h>
 	"Permutation.h"
 	"Node.h"
 
-1395954437 /home/michal/Programowanie/Permutations/include/Permutations/Generator.h
+1396295584 /home/michal/Programowanie/Permutations/include/Permutations/Generator.h
 	"Nodes.h"
 	"Permutation.h"
 	"Permutations/Permutations.h"
 
-1396214258 source:/home/michal/Programowanie/Permutations/src/Generator.cpp
+1396340222 source:/home/michal/Programowanie/Permutations/src/Generator.cpp
 	"Permutations/Generator.h"
 	"Permutations/Permutations.h"
 	"Nodes.h"
 
-1396214544 /home/michal/Programowanie/Permutations/include/Permutations/Permutations.h
+1396334275 /home/michal/Programowanie/Permutations/include/Permutations/Permutations.h
 	"Permutation.h"
 

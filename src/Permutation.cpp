@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include <stdio.h>
 #include "Permutation.h"
 #include "Node.h"
@@ -9,6 +12,7 @@ Permutation::Permutation(int amount)
     this->setAmount(amount);
     this->nodes = new Node * [this->amount];
     this->columns = new int [this->amount];
+    this->sign = 0;
 
     for (int i = 1; i < this->amount; i++)
     {
@@ -21,6 +25,9 @@ Permutation::Permutation(const Permutation& layout)
     this->amount = layout.amount;
     this->nodes = new Node * [layout.amount];
     this->columns = new int [this->amount];
+    this->branchBegin = layout.branchBegin;
+    this->sign = 0;
+
     for (int i = 1; i < layout.amount; i++)
     {
         this->nodes[i]   = layout.nodes[i];
@@ -33,6 +40,7 @@ Permutation Permutation::copy(Permutation *layout)
     this->amount = layout->amount;
     this->nodes =  new Node * [layout->amount];
     this->columns = new int [this->amount];
+    this->setBranchBegin(layout->getBranchBegin());
     for (int i = 1; i < layout->amount; i++)
     {
         this->nodes[i]   = layout->nodes[i];
@@ -54,6 +62,36 @@ Permutation::~Permutation(void)
         delete [] this->columns;
     }
 }
+/**
+ * Counting and getting sign
+ */
+ int Permutation::getSign()
+ {
+    if (this->sign != 0)
+        return this->sign;
+
+    int sub = 0;
+
+    int *cache = new int [this->amount];
+    for (int i = 1; i < this->amount - 1; i++)
+    {
+        cache[i] = 0;
+    }
+
+    for (int i = 1; i < this->amount - 1; i++)
+    {
+        cache[this->nodes[i]->getTo()] = 1;
+        sub += this->nodes[i]->getTo() - 1;
+        for (int j = 1; j < this->nodes[i]->getTo(); j++)
+        {
+            sub -=cache[j];
+        }
+        this->nodes[i];
+    }
+    delete cache;
+    this->sign = (sub % 2)?-1:1;
+    return this->sign;
+ }
 
 /**
  * Check whether it is possible to create permutation with given nodes
@@ -103,7 +141,7 @@ void Permutation::pop()
 }
 
 /**
- * Output pethods
+ * Output methods
  */
 
 void Permutation::writeNode()
@@ -128,9 +166,8 @@ void Permutation::table()
 {
     for (int i = 1; i < this->getAmount(); i++)
     {
-        printf("| %i | %c | 0 |\n", i, this->nodes[i]->getName());
+        printf("| %i | %i | %c |\n", i, this->nodes[i]->getTo(), this->nodes[i]->getName());
     }
-    printf("Sign: -\n");
 }
 
 /**
@@ -156,4 +193,19 @@ void Permutation::setAmount(int amount)
 {
     // We start from 1 so we need one more place
     this->amount = amount + 1;
+}
+
+void Permutation::setBranchBegin(int branchBegin)
+{
+    this->branchBegin = branchBegin;
+}
+
+int Permutation::getBranchBegin()
+{
+    return this->branchBegin;
+}
+
+Node *Permutation::getNode(int i)
+{
+    return this->nodes[i];
 }

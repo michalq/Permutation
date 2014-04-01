@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #ifndef NODE_H
 #define NODE_H
 
