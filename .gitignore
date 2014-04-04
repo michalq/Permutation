@@ -17,3 +17,6 @@
 
 *.depend
 *.layout
+
+input*
+*.txt

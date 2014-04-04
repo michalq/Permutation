@@ -143,6 +143,7 @@ void Nodes::table()
 {
     int amount = this->getAmount();
     int tabAmount;
+    printf("   ");
     for (int i = 1; i <= this->maxTo(); i++)
     {
         printf("  %i ", i);
@@ -152,7 +153,7 @@ void Nodes::table()
     {
         if (this->getNode(i - 1)->getStatus() && this->getNode(i - 1)->getFrom() != this->getNode(i)->getFrom())
         {
-            printf("\n%i |", k);
+            printf("\n %i |", k);
             tabAmount = this->getNode(i)->getTo();
             k++;
         }

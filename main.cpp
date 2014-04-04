@@ -3,6 +3,7 @@
  */
 #include <stdio.h>
 #include "Permutations/Generator.h"
+#include <fstream>
 
 /**
  * - Do something with dynamically generated tables in Nodes.cpp and Permutaions.cpp
@@ -12,21 +13,21 @@ int main(void)
 {
     // Set nodes
     Nodes nodes = Nodes();
-    nodes.add(new Node('a', 1, 1));
-    nodes.add(new Node('b', 1, 3));
-    nodes.add(new Node('c', 1, 4));
-    nodes.add(new Node('d', 2, 2));
-    nodes.add(new Node('e', 2, 4));
-    nodes.add(new Node('f', 2, 5));
-    nodes.add(new Node('g', 3, 1));
-    nodes.add(new Node('h', 3, 2));
-    nodes.add(new Node('i', 3, 4));
-    nodes.add(new Node('j', 4, 2));
-    nodes.add(new Node('k', 4, 3));
-    nodes.add(new Node('l', 4, 5));
-    nodes.add(new Node('m', 5, 1));
-    nodes.add(new Node('n', 5, 3));
-    nodes.add(new Node('o', 5, 5));
+    FILE *input;
+    input = fopen ("input2","r");
+    char name, sign;
+    int from, to, weight;
+    while(!feof(input))
+    {
+        fscanf (input, "%c[^ ]", &name);
+        fscanf (input, "%i[^>]", &from);
+        fscanf (input, "%c", &sign);
+        fscanf (input, "%i", &to);
+        fscanf (input, "%i\n", &weight);
+        nodes.add(new Node(name, from, to, weight));
+    }
+    fclose(input);
+
     // Initialize permutations generator
     Permutations::Generator generator = Permutations::Generator(&nodes);
     generator.init();

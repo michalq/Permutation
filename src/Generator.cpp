@@ -37,7 +37,7 @@ void Permutations::Generator::init()
     int *verses = new int [versesAmount];
     int *verses_cache = new int [versesAmount];
     Permutation *test = new Permutation(versesAmount);
-    // Init
+    // Init, first run
     for (int i = 1; i <= versesAmount; i++)
     {
         verses[i] = this->nodes->verse(i);
