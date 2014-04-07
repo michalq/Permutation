@@ -1,8 +1,11 @@
 /**
  * Created by: Michal Kutrzeba
  */
+#include <stack>
+#include <stdio.h> //temp
 #include "Permutations/Generator.h"
 #include "Permutations/Permutations.h"
+#include "Permutations/TemporaryPermutation.h"
 #include "Nodes.h"
 
 void Permutations::Generator::setNodes(Nodes *nodes)
@@ -14,7 +17,7 @@ Permutations::Generator::Generator(Nodes *nodes)
 {
     this->setNodes(nodes);
     this->permutations = new Permutations();
-    this->branch = -1;
+    this->branch = 1;
 }
 
 void Permutations::Generator::setContainer(Permutations *container)
@@ -36,7 +39,9 @@ void Permutations::Generator::init()
     int versesAmount = this->nodes->maxFrom();
     int *verses = new int [versesAmount];
     int *verses_cache = new int [versesAmount];
-    Permutation *test = new Permutation(versesAmount);
+    std::stack <Permutation*> branches;
+    TemporaryPermutation *test = new TemporaryPermutation(versesAmount);
+    Permutation *cache = new Permutation();
     // Init, first run
     for (int i = 1; i <= versesAmount; i++)
     {
@@ -51,8 +56,6 @@ void Permutations::Generator::init()
         if (test->checkLast() && this->ite == versesAmount)
         {
             // Saving good permutation
-            Permutation *cache = new Permutation();
-
             if (this->branch == -1)
             {
                 test->setBranchBegin(1);
@@ -62,7 +65,28 @@ void Permutations::Generator::init()
                 test->setBranchBegin(this->branch);
                 this->branch = -1;
             }
-            this->permutations->add(cache->copy(test));
+            this->permutations->add((new Permutation)->copy(test));
+            cache = this->permutations->top();
+
+            while ( (! branches.empty()) && (branches.top()->getBranchBegin() >= cache->getBranchBegin()))
+            {
+                branches.pop();
+            }
+            if ( ! branches.empty())
+            {
+                if (branches.top()->getBranchBegin() < cache->getBranchBegin())
+                {
+                    cache->setHigherBranch(branches.top());
+                    branches.push(cache);
+                }
+            }
+            else
+            {
+                // If there is no branches, push first one
+                branches.push(cache);
+                printf("%p > %p\n", cache, branches.top());
+                cache->setHigherBranch(new Permutation());
+            }
         }
 
         //
@@ -85,7 +109,7 @@ void Permutations::Generator::init()
     delete verses_cache;
 }
 
-bool Permutations::Generator::recursiveToTop(Permutation *test, int *verses_cache, int *verses)
+bool Permutations::Generator::recursiveToTop(TemporaryPermutation *test, int *verses_cache, int *verses)
 {
     // Deleting last object
     test->pop();

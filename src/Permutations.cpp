@@ -10,6 +10,7 @@ Permutations::Permutations::Permutations()
 {
     this->counter = 0;
     this->container = new Permutation [200];
+    this->determinant = Determinant();
 }
 
 /**
@@ -19,6 +20,7 @@ void Permutations::Permutations::add(Permutation permutation)
 {
     Permutation *cache = new Permutation();
     *cache = permutation;
+    cache->updateSigns();
     this->container[this->counter] = *cache;
     this->counter++;
 }
@@ -34,7 +36,7 @@ void Permutations::Permutations::table()
 {
     for (int i = 0; i < this->counter; i++)
     {
-        printf("\n#%i\n", i+1);
+        printf("\n#%i, %p -> %p\n", i+1, this->container[i].getHigherBranch(), &this->container[i]);
         this->container[i].table();
         printf("Sign: %i\n", this->container[i].getSign());
         printf("Branch begins at: %i\n", this->container[i].getBranchBegin());
@@ -42,48 +44,17 @@ void Permutations::Permutations::table()
 }
 
 /**
- * Showing determinant equation in RPN
+ * Returning determinant object
  */
-void Permutations::Permutations::detEquationRPN()
+Determinant Permutations::Permutations::det()
 {
-    printf("0");
-    std::stack <int> signs;
-    int amount = this->container[0].getAmount();
-    int lastSign;
-    for (int i = 0; i < this->counter; i++)
-    {
-        if (this->container[i].getBranchBegin() != 1)
-        {
-            signs.push(this->container[i].getBranchBegin());
-        }
-        for (int j = this->container[i].getBranchBegin(); j < amount; j++)
-        {
-            printf("%c", this->container[i].getNode(j)->getName());
-        }
-        if ( ! signs.empty())
-        {
-            lastSign = signs.top();
-        }
-        for (int j = this->container[i+1].getBranchBegin()+1; j < amount; j++)
-        {
-            if (lastSign == j)
-            {
-                printf("-");
-                signs.pop();
-                if ( ! signs.empty())
-                {
-                    lastSign = signs.top();
-                }
-            }
-            printf("*");
-        }
-    }
+    return this->determinant;
 }
 
 /**
- * Counting equation
+ * Returns last permutation
  */
-int Permutations::Permutations::det()
+Permutation *Permutations::Permutations::top()
 {
-    return 5;
+    return &this->container[this->counter-1];
 }

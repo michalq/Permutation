@@ -5,18 +5,21 @@
 #include "Permutation.h"
 #include "Node.h"
 
-Permutation::Permutation(){}
+Permutation::Permutation(void)
+{
+    this->sign = 0;
+}
 
 Permutation::Permutation(int amount)
 {
     this->setAmount(amount);
     this->nodes = new Node * [this->amount];
-    this->columns = new int [this->amount];
+    this->signs = new int [this->amount];
     this->sign = 0;
-
+    this->setHigherBranch(new Permutation);
     for (int i = 1; i < this->amount; i++)
     {
-        this->columns[i] = 0;
+        this->signs[i] = 0;
     }
 }
 
@@ -24,14 +27,15 @@ Permutation::Permutation(const Permutation& layout)
 {
     this->amount = layout.amount;
     this->nodes = new Node * [layout.amount];
-    this->columns = new int [this->amount];
+    this->signs = new int [layout.amount];
     this->branchBegin = layout.branchBegin;
+    this->higherBranch = layout.higherBranch;
     this->sign = 0;
 
     for (int i = 1; i < layout.amount; i++)
     {
-        this->nodes[i]   = layout.nodes[i];
-        this->columns[i] = layout.columns[i];
+        this->nodes[i] = layout.nodes[i];
+        this->signs[i] = 0;
     }
 }
 
@@ -39,12 +43,14 @@ Permutation Permutation::copy(Permutation *layout)
 {
     this->amount = layout->amount;
     this->nodes =  new Node * [layout->amount];
-    this->columns = new int [this->amount];
+    this->signs = new int [layout->amount];
     this->setBranchBegin(layout->getBranchBegin());
+    this->setHigherBranch(layout->getHigherBranch());
     for (int i = 1; i < layout->amount; i++)
     {
-        this->nodes[i]   = layout->nodes[i];
-        this->columns[i] = layout->columns[i];
+        this->nodes[i] = layout->nodes[i];
+        //printf("%i\n", this->signs[i]);
+        this->signs[i] = 0;
     }
     return *this;
 }
@@ -55,11 +61,6 @@ Permutation::~Permutation(void)
     if ( ! this->nodes)
     {
         delete [] this->nodes;
-    }
-
-    if ( ! this->columns)
-    {
-        delete [] this->columns;
     }
 }
 /**
@@ -93,52 +94,6 @@ Permutation::~Permutation(void)
     return this->sign;
  }
 
-/**
- * Check whether it is possible to create permutation with given nodes
- */
-bool Permutation::checkPossibility()
-{
-    if (this->getStatus())
-        return this->isPossible;
-
-    return false;
-}
-
-/**
- * Returns whether is last node correct choosen
- */
-bool Permutation::checkLast()
-{
-    return !(this->columns[this->nodes[this->position-1]->getTo()] > 1);
-}
-
-/**
- * Adding node to the last possible field
- */
-bool Permutation::push(Node *node)
-{
-    if (this->getPosition() == this->getAmount())
-    {
-        this->isFull = false;
-        return false;
-    }
-
-    this->nodes[node->getFrom()] = node;
-    this->columns[node->getTo()]++;
-    this->position++;
-    return this->checkLast();
-}
-
-/**
- * "Removing" last element.
- * Decrementing amount of noodes, last element is overwriting by push()
- */
-void Permutation::pop()
-{
-    this->position -= 1;
-    int cache = this->nodes[this->position]->getTo();
-    this->columns[cache] -= 1;
-}
 
 /**
  * Output methods
@@ -153,32 +108,41 @@ void Permutation::writeNode()
     printf("\n");
 }
 
-void Permutation::writeColumns()
-{
-    for (int i = 1; i < this->getAmount(); i++)
-    {
-        printf("%i, ", this->columns[i]);
-    }
-    printf("\n");
-}
-
 void Permutation::table()
 {
     for (int i = 1; i < this->getAmount(); i++)
     {
-        printf("| %i | %i | %c |\n", i, this->nodes[i]->getTo(), this->nodes[i]->getName());
+        printf("| %i | %i | %c | %i |\n", i, this->nodes[i]->getTo(), this->nodes[i]->getName(), this->signs[i]);
+    }
+}
+
+void Permutation::updateSigns()
+{
+    int consAmount = this->getSign()==-1?1:0;
+    Permutation *handler = this;
+
+    for (int i = this->getAmount()-1; i >= 1; i--)
+    {
+        consAmount += handler->signs[i];
+        this->signs[i] = handler->signs[i];
+        if (i == 1) break;
+        if (i == handler->getBranchBegin())
+        {
+            // Segmentation faults
+            //printf("%p\n", handler->getHigherBranch());
+            //handler = handler->getHigherBranch();
+        }
+    }
+    if (consAmount%2 != 0)
+    {
+        this->signs[this->getBranchBegin()] = 1;
+        //printf("%i\n", this->signs[this->getBranchBegin()]);
     }
 }
 
 /**
  * Getters/Setters
  */
-
-bool Permutation::getStatus()
-{
-    return this->isFull;
-}
-
 int Permutation::getAmount()
 {
     return this->amount;
@@ -208,4 +172,14 @@ int Permutation::getBranchBegin()
 Node *Permutation::getNode(int i)
 {
     return this->nodes[i];
+}
+
+void Permutation::setHigherBranch(Permutation *branch)
+{
+    this->higherBranch = branch;
+}
+
+Permutation *Permutation::getHigherBranch()
+{
+    return this->higherBranch;
 }

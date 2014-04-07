@@ -70,4 +70,3 @@ bool Node::getStatus()
 {
     return this->status;
 }
-

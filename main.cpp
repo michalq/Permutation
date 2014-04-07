@@ -43,7 +43,7 @@ int main(void)
     permutations->table();
 
     printf("\nDeterminant:\n");
-    permutations->detEquationRPN();
+    //permutations->detEquationRPN();
 
     return 0;
 }

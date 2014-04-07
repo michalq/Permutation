@@ -4,6 +4,7 @@
 #include "Nodes.h"
 #include "Permutation.h"
 #include "Permutations/Permutations.h"
+#include "Permutations/TemporaryPermutation.h"
 
 #ifndef GENERATOR_H
 #define GENERATOR_H
@@ -16,7 +17,7 @@ namespace Permutations {
             Generator(Nodes *nodes);
 
             void init();
-            bool recursiveToTop(Permutation *test, int *verses_cache, int *verses);
+            bool recursiveToTop(TemporaryPermutation *test, int *verses_cache, int *verses);
             void setContainer(Permutations *permutations);
             Permutations *getPermutations();
         private:
