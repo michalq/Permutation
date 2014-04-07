@@ -1,8 +1,8 @@
 /**
  * Created by: Michal Kutrzeba
  */
+ #include <stdio.h> //temp
 #include <stack>
-#include <stdio.h> //temp
 #include "Permutations/Generator.h"
 #include "Permutations/Permutations.h"
 #include "Permutations/TemporaryPermutation.h"
@@ -65,8 +65,8 @@ void Permutations::Generator::init()
                 test->setBranchBegin(this->branch);
                 this->branch = -1;
             }
-            this->permutations->add((new Permutation)->copy(test));
-            cache = this->permutations->top();
+            cache = new Permutation();
+            cache->copy(test);
 
             while ( (! branches.empty()) && (branches.top()->getBranchBegin() >= cache->getBranchBegin()))
             {
@@ -78,15 +78,16 @@ void Permutations::Generator::init()
                 {
                     cache->setHigherBranch(branches.top());
                     branches.push(cache);
+                    //printf("<%p>\n", cache->getHigherBranch());
                 }
             }
             else
             {
                 // If there is no branches, push first one
                 branches.push(cache);
-                printf("%p > %p\n", cache, branches.top());
                 cache->setHigherBranch(new Permutation());
             }
+            this->permutations->add(cache);
         }
 
         //

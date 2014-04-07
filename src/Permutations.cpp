@@ -9,19 +9,17 @@
 Permutations::Permutations::Permutations()
 {
     this->counter = 0;
-    this->container = new Permutation [200];
+    this->container = new Permutation * [200];
     this->determinant = Determinant();
 }
 
 /**
  * Adding new permutation on stack
  */
-void Permutations::Permutations::add(Permutation permutation)
+void Permutations::Permutations::add(Permutation *permutation)
 {
-    Permutation *cache = new Permutation();
-    *cache = permutation;
-    cache->updateSigns();
-    this->container[this->counter] = *cache;
+    permutation->updateSigns();
+    this->container[this->counter] = permutation;
     this->counter++;
 }
 
@@ -36,10 +34,10 @@ void Permutations::Permutations::table()
 {
     for (int i = 0; i < this->counter; i++)
     {
-        printf("\n#%i, %p -> %p\n", i+1, this->container[i].getHigherBranch(), &this->container[i]);
-        this->container[i].table();
-        printf("Sign: %i\n", this->container[i].getSign());
-        printf("Branch begins at: %i\n", this->container[i].getBranchBegin());
+        printf("\n#%i, %p -> %p\n", i+1, this->container[i]->getHigherBranch(), this->container[i]);
+        this->container[i]->table();
+        printf("Sign: %i\n", this->container[i]->getSign());
+        printf("Branch begins at: %i\n", this->container[i]->getBranchBegin());
     }
 }
 
@@ -56,5 +54,5 @@ Determinant Permutations::Permutations::det()
  */
 Permutation *Permutations::Permutations::top()
 {
-    return &this->container[this->counter-1];
+    return this->container[this->counter-1];
 }

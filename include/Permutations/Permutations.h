@@ -12,8 +12,8 @@ namespace Permutations {
     {
         public:
             Permutations();
-            void add(Permutation permutation);
-            Permutation *container;
+            void add(Permutation *permutation);
+            Permutation **container;
             void table();
             Determinant det();
             Permutation *top();

@@ -129,8 +129,8 @@ void Permutation::updateSigns()
         if (i == handler->getBranchBegin())
         {
             // Segmentation faults
-            //printf("%p\n", handler->getHigherBranch());
-            //handler = handler->getHigherBranch();
+            //printf("%p %p\n", handler, handler->getHigherBranch());
+            handler = handler->getHigherBranch();
         }
     }
     if (consAmount%2 != 0)
