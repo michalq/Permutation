@@ -39,6 +39,11 @@ Permutation::Permutation(const Permutation& layout)
     }
 }
 
+int Permutation::getNodeSign(int i)
+{
+    return this->signs[i];
+}
+
 Permutation Permutation::copy(Permutation *layout)
 {
     this->amount = layout->amount;

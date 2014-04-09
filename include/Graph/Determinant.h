@@ -11,15 +11,16 @@ namespace Graph {
         public:
             Determinant(Permutations *);
             Determinant();
-            void generate();
+            Determinant *generate();
             void show();
             void setPermutations(Permutations *);
             Permutations *getPermutations();
             Permutation *getPermutation(int);
         private:
             Permutations *permutations;
-            //std::string rpnequation;
-            //std::string equation;
+            Permutation *dummyPermutation;
+            std::string rpnequation;
+            std::string equation;
     };
 }
 

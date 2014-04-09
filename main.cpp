@@ -14,7 +14,7 @@ int main(void)
     // Set nodes
     Nodes nodes = Nodes();
     FILE *input;
-    input = fopen ("input","r");
+    input = fopen ("input2","r");
     char name, sign;
     int from, to, weight;
     while(!feof(input))
@@ -36,15 +36,14 @@ int main(void)
 
     //printf("\n\List of nodes:\n");
     //nodes.listOfNodes();
-    printf("\n\nTable reresentation:\n");
+    printf("\n\nTable representation:\n");
     nodes.table();
 
     printf("\n\nAll permutations:");
     permutations->table();
 
     printf("\nDeterminant:\n");
-    permutations->det().generate();
-    permutations->det().show();
+    permutations->det()->generate()->show();
 
     return 0;
 }

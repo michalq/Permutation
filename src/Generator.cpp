@@ -70,7 +70,7 @@ void Graph::Generator::init()
             cache = new Permutation();
             cache->copy(test);
 
-            while ( (! branches.empty()) && (branches.top()->getBranchBegin() >= cache->getBranchBegin()))
+            while ( (!branches.empty()) && (branches.top()->getBranchBegin() >= cache->getBranchBegin()))
             {
                 branches.pop();
             }
@@ -80,7 +80,6 @@ void Graph::Generator::init()
                 {
                     cache->setHigherBranch(branches.top());
                     branches.push(cache);
-                    //printf("<%p>\n", cache->getHigherBranch());
                 }
             }
             else

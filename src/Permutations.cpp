@@ -11,7 +11,7 @@ Graph::Permutations::Permutations()
 {
     this->counter = 0;
     this->container = new Permutation * [200];
-    this->determinant = Determinant(this);
+    this->determinant = new Determinant(this);
 }
 
 /**
@@ -45,7 +45,7 @@ void Graph::Permutations::table()
 /**
  * Returning determinant object
  */
-Graph::Determinant Graph::Permutations::det()
+Graph::Determinant *Graph::Permutations::det()
 {
     return this->determinant;
 }

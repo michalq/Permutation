@@ -15,14 +15,14 @@ namespace Graph {
             void add(Permutation*);
             Permutation **container;
             void table();
-            Determinant det();
+            Determinant *det();
             Permutation *top();
             Permutation *getPermutation(int);
             int getAmount();
         protected:
         private:
             int counter;
-            Determinant determinant;
+            Determinant *determinant;
     };
 }
 

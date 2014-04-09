@@ -22,6 +22,7 @@ class Permutation
         void setAmount(int amount);
         void setBranchBegin(int branchBegin);
         void setHigherBranch(Permutation *branch);
+        int getNodeSign(int);
 
         int getAmount();
         int getPosition();
