@@ -1,22 +1,23 @@
 /**
  * Created by: Michal Kutrzeba
  */
-#include "Permutations/Permutations.h"
+#include "Graph/Permutations.h"
+#include "Graph/Determinant.h"
 #include "Permutation.h"
 #include <stdio.h>
 #include <stack>
 
-Permutations::Permutations::Permutations()
+Graph::Permutations::Permutations()
 {
     this->counter = 0;
     this->container = new Permutation * [200];
-    this->determinant = Determinant();
+    this->determinant = Determinant(this);
 }
 
 /**
  * Adding new permutation on stack
  */
-void Permutations::Permutations::add(Permutation *permutation)
+void Graph::Permutations::add(Permutation *permutation)
 {
     permutation->updateSigns();
     this->container[this->counter] = permutation;
@@ -30,7 +31,7 @@ void Permutations::Permutations::add(Permutation *permutation)
  * Sign: (permutation sign)
  * Branch begins at: (begin of branch)
  */
-void Permutations::Permutations::table()
+void Graph::Permutations::table()
 {
     for (int i = 0; i < this->counter; i++)
     {
@@ -44,7 +45,7 @@ void Permutations::Permutations::table()
 /**
  * Returning determinant object
  */
-Determinant Permutations::Permutations::det()
+Graph::Determinant Graph::Permutations::det()
 {
     return this->determinant;
 }
@@ -52,7 +53,23 @@ Determinant Permutations::Permutations::det()
 /**
  * Returns last permutation
  */
-Permutation *Permutations::Permutations::top()
+Permutation *Graph::Permutations::top()
 {
     return this->container[this->counter-1];
+}
+
+/**
+ *
+ */
+Permutation *Graph::Permutations::getPermutation(int i)
+{
+    return this->container[i];
+}
+
+/**
+ *
+ */
+int Graph::Permutations::getAmount()
+{
+    return this->counter;
 }

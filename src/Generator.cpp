@@ -3,29 +3,29 @@
  */
  #include <stdio.h> //temp
 #include <stack>
-#include "Permutations/Generator.h"
-#include "Permutations/Permutations.h"
-#include "Permutations/TemporaryPermutation.h"
+#include "Graph/Generator.h"
+#include "Graph/Permutations.h"
+#include "Graph/TemporaryPermutation.h"
 #include "Nodes.h"
 
-void Permutations::Generator::setNodes(Nodes *nodes)
+void Graph::Generator::setNodes(Nodes *nodes)
 {
     this->nodes = nodes;
 }
 
-Permutations::Generator::Generator(Nodes *nodes)
+Graph::Generator::Generator(Nodes *nodes)
 {
     this->setNodes(nodes);
     this->permutations = new Permutations();
     this->branch = 1;
 }
 
-void Permutations::Generator::setContainer(Permutations *container)
+void Graph::Generator::setContainer(Permutations *container)
 {
     this->permutations = container;
 }
 
-Permutations::Permutations *Permutations::Generator::getPermutations()
+Graph::Permutations *Graph::Generator::getPermutations()
 {
     return this->permutations;
 }
@@ -34,7 +34,7 @@ Permutations::Permutations *Permutations::Generator::getPermutations()
  * JESUS CHRIST! YOU NEED TO OPTIMIZE THESE METHODS BELOW!
  * ... but dont hurry
  */
-void Permutations::Generator::init()
+void Graph::Generator::init()
 {
     int versesAmount = this->nodes->maxFrom();
     int *verses = new int [versesAmount];
@@ -42,6 +42,8 @@ void Permutations::Generator::init()
     std::stack <Permutation*> branches;
     TemporaryPermutation *test = new TemporaryPermutation(versesAmount);
     Permutation *cache = new Permutation();
+    // This is Permutation object which will be assignes as higherBranch to Permutation who hasn't got any higher branches
+    Permutation *topBranch;
     // Init, first run
     for (int i = 1; i <= versesAmount; i++)
     {
@@ -110,7 +112,7 @@ void Permutations::Generator::init()
     delete verses_cache;
 }
 
-bool Permutations::Generator::recursiveToTop(TemporaryPermutation *test, int *verses_cache, int *verses)
+bool Graph::Generator::recursiveToTop(TemporaryPermutation *test, int *verses_cache, int *verses)
 {
     // Deleting last object
     test->pop();

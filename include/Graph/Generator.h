@@ -3,13 +3,13 @@
  */
 #include "Nodes.h"
 #include "Permutation.h"
-#include "Permutations/Permutations.h"
-#include "Permutations/TemporaryPermutation.h"
+#include "Graph/Permutations.h"
+#include "Graph/TemporaryPermutation.h"
 
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-namespace Permutations {
+namespace Graph {
     class Generator
     {
         public:

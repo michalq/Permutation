@@ -1,22 +1,24 @@
 /**
  * Created by: Michal Kutrzeba
  */
-#include "Permutation.h"
-#include "Permutations/Determinant.h"
-
 #ifndef PERMUTATIONS_H
 #define PERMUTATIONS_H
 
-namespace Permutations {
+#include "Graph/Determinant.h"
+#include "Permutation.h"
+
+namespace Graph {
     class Permutations
     {
         public:
             Permutations();
-            void add(Permutation *permutation);
+            void add(Permutation*);
             Permutation **container;
             void table();
             Determinant det();
             Permutation *top();
+            Permutation *getPermutation(int);
+            int getAmount();
         protected:
         private:
             int counter;

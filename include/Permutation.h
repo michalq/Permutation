@@ -1,9 +1,10 @@
 /**
  * Created by: Michal Kutrzeba
  */
-#include "Node.h"
 #ifndef PERMUTATION_H
 #define PERMUTATION_H
+
+#include "Node.h"
 
 /**
  * Single representation of one permutation

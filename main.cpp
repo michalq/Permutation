@@ -2,7 +2,7 @@
  * Created by: Michal Kutrzeba
  */
 #include <stdio.h>
-#include "Permutations/Generator.h"
+#include "Graph/Generator.h"
 #include <fstream>
 
 /**
@@ -14,7 +14,7 @@ int main(void)
     // Set nodes
     Nodes nodes = Nodes();
     FILE *input;
-    input = fopen ("input2","r");
+    input = fopen ("input","r");
     char name, sign;
     int from, to, weight;
     while(!feof(input))
@@ -29,10 +29,10 @@ int main(void)
     fclose(input);
 
     // Initialize permutations generator
-    Permutations::Generator generator = Permutations::Generator(&nodes);
+    Graph::Generator generator = Graph::Generator(&nodes);
     generator.init();
     // Permutations object
-    Permutations::Permutations *permutations = generator.getPermutations();
+    Graph::Permutations *permutations = generator.getPermutations();
 
     //printf("\n\List of nodes:\n");
     //nodes.listOfNodes();
@@ -43,7 +43,8 @@ int main(void)
     permutations->table();
 
     printf("\nDeterminant:\n");
-    //permutations->detEquationRPN();
+    permutations->det().generate();
+    permutations->det().show();
 
     return 0;
 }

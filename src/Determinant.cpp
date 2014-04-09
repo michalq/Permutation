@@ -1,53 +1,58 @@
-#include "Permutations/Determinant.h"
+#include "Graph/Determinant.h"
+#include "Graph/Permutations.h"
+#include <stdio.h>
+#include <stack>
 
-Determinant::Determinant()
+Graph::Determinant::Determinant(Permutations *permutations)
+{
+    this->setPermutations(permutations);
+}
+
+Graph::Determinant::Determinant()
 {
 
+}
+
+/**
+ * It's a shortcut to ith permutation object
+ */
+Permutation *Graph::Determinant::getPermutation(int i)
+{
+    return this->permutations->getPermutation(i);
+}
+
+Graph::Permutations *Graph::Determinant::getPermutations()
+{
+    return this->permutations;
 }
 
 /**
  * Show determinant equation in RPN (Reverse Polish Notation)
  */
-void Determinant::getRPNequation()
+void Graph::Determinant::generate()
 {
-    /*printf("0");
-    std::stack <int> signs;
-    int amount = this->container[0].getAmount();
-    int lastSign;
-    for (int i = 0; i < this->counter; i++)
+
+    int amountOfLines = this->getPermutation(0)->getAmount();
+    int amountOfPermutations = this->getPermutations()->getAmount();
+
+    for (int i = 0; i < amountOfPermutations; i++)
     {
-        if (this->container[i].getBranchBegin() != 1)
+        for (int j = this->getPermutation(i)->getBranchBegin(); j < amountOfLines; j++)
         {
-            signs.push(this->container[i].getBranchBegin());
+            printf("%c", this->getPermutation(i)->getNode(j)->getName());
         }
-        for (int j = this->container[i].getBranchBegin(); j < amount; j++)
-        {
-            printf("%c", this->container[i].getNode(j)->getName());
-        }
-        if ( ! signs.empty())
-        {
-            lastSign = signs.top();
-        }
-        for (int j = this->container[i+1].getBranchBegin()+1; j < amount; j++)
-        {
-            if (lastSign == j)
-            {
-                printf("-");
-                signs.pop();
-                if ( ! signs.empty())
-                {
-                    lastSign = signs.top();
-                }
-            }
-            printf("*");
-        }
-    }*/
+    }
 }
 
 /**
  * Show human readable equation
  */
-void Determinant::getEquation()
+void Graph::Determinant::show()
 {
 
+}
+
+void Graph::Determinant::setPermutations(Permutations *permutations)
+{
+    this->permutations = permutations;
 }

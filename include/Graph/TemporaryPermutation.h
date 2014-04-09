@@ -2,7 +2,7 @@
 #define TEMPORARYPERMUTATION_H
 
 #include "Permutation.h"
-namespace Permutations {
+namespace Graph {
     class TemporaryPermutation : public Permutation
     {
         public:

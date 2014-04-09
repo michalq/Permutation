@@ -1,9 +1,9 @@
-#include "Permutations/TemporaryPermutation.h"
+#include "Graph/TemporaryPermutation.h"
 
 /**
  * This class is using only by Generator to generate new permutations.
  */
- Permutations::TemporaryPermutation::TemporaryPermutation(int amount)
+ Graph::TemporaryPermutation::TemporaryPermutation(int amount)
     : Permutation(amount)
  {
     this->columns = new int [this->amount];
@@ -13,7 +13,7 @@
     }
  }
 
-bool Permutations::TemporaryPermutation::push(Node *node)
+bool Graph::TemporaryPermutation::push(Node *node)
 {
     if (this->getPosition() == this->getAmount())
     {
@@ -30,7 +30,7 @@ bool Permutations::TemporaryPermutation::push(Node *node)
  * "Removing" last element.
  * Decrementing amount of noodes, last element is overwriting by push()
  */
-void Permutations::TemporaryPermutation::pop()
+void Graph::TemporaryPermutation::pop()
 {
     this->position -= 1;
     int cache = this->nodes[this->position]->getTo();
@@ -40,7 +40,7 @@ void Permutations::TemporaryPermutation::pop()
 /**
  * Check whether it is possible to create permutation with given nodes
  */
-bool Permutations::TemporaryPermutation::checkPossibility()
+bool Graph::TemporaryPermutation::checkPossibility()
 {
     if (this->getStatus())
         return this->isPossible;
@@ -51,12 +51,12 @@ bool Permutations::TemporaryPermutation::checkPossibility()
 /**
  * Returns whether is last node correct choosen
  */
-bool Permutations::TemporaryPermutation::checkLast()
+bool Graph::TemporaryPermutation::checkLast()
 {
     return !(this->columns[this->nodes[this->position-1]->getTo()] > 1);
 }
 
-bool Permutations::TemporaryPermutation::getStatus()
+bool Graph::TemporaryPermutation::getStatus()
 {
     return this->isFull;
 }
