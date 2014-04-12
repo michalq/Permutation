@@ -8,6 +8,7 @@
 Permutation::Permutation(void)
 {
     this->sign = 0;
+    this->branchBegin = 1;
 }
 
 Permutation::Permutation(int amount)
@@ -16,7 +17,9 @@ Permutation::Permutation(int amount)
     this->nodes = new Node * [this->amount];
     this->signs = new int [this->amount];
     this->sign = 0;
+    this->branchBegin = 1;
     this->setHigherBranch(new Permutation);
+    this->branchBegin = 1;
     for (int i = 1; i < this->amount; i++)
     {
         this->signs[i] = 0;

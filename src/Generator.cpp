@@ -1,7 +1,6 @@
 /**
  * Created by: Michal Kutrzeba
  */
- #include <stdio.h> //temp
 #include <stack>
 #include "Graph/Generator.h"
 #include "Graph/Permutations.h"

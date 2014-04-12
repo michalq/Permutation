@@ -2,8 +2,10 @@
  * Created by: Michal Kutrzeba
  */
 #include <stdio.h>
-#include "Graph/Generator.h"
+#include <iostream>
 #include <fstream>
+
+#include "Graph/Generator.h"
 
 /**
  * - Do something with dynamically generated tables in Nodes.cpp and Permutaions.cpp
@@ -34,7 +36,7 @@ int main(void)
     // Permutations object
     Graph::Permutations *permutations = generator.getPermutations();
 
-    //printf("\n\List of nodes:\n");
+    //printf("\nList of nodes:\n");
     //nodes.listOfNodes();
     printf("\n\nTable representation:\n");
     nodes.table();
@@ -42,8 +44,12 @@ int main(void)
     printf("\n\nAll permutations:");
     permutations->table();
 
-    printf("\nDeterminant:\n");
-    permutations->det()->generate()->show();
+    printf("\n\nDeterminant in postfix (RPN):\n");
+    std::cout << permutations->det()->getRPNEquation();
+
+    printf("\n\nDeterminant in infix:\n");
+    std::cout << permutations->det()->getEquation();
+    printf("\n");
 
     return 0;
 }
