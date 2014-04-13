@@ -1,3 +1,6 @@
+/**
+ * Created by: Michal Kutrzeba
+ */
 #include "Graph/TemporaryPermutation.h"
 
 /**

@@ -33,8 +33,6 @@ int main(void)
     // Initialize permutations generator
     Graph::Generator generator = Graph::Generator(&nodes);
     generator.init();
-    // Permutations object
-    Graph::Permutations *permutations = generator.getPermutations();
 
     //printf("\nList of nodes:\n");
     //nodes.listOfNodes();
@@ -42,13 +40,13 @@ int main(void)
     nodes.table();
 
     printf("\n\nAll permutations:");
-    permutations->table();
+    generator.getPermutations()->table();
 
     printf("\n\nDeterminant in postfix (RPN):\n");
-    std::cout << permutations->det()->getRPNEquation();
+    std::cout << generator.getPermutations()->det()->getRPNEquation();
 
     printf("\n\nDeterminant in infix:\n");
-    std::cout << permutations->det()->getEquation();
+    std::cout << generator.getPermutations()->det()->getEquation();
     printf("\n");
 
     return 0;

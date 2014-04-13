@@ -1,4 +1,9 @@
 #include "Equations/Postfix.h"
+/**
+ * Very simple class to convert from postfix notation to:
+ * - infix notation
+ * -
+ */
 
 Equations::Postfix::Postfix(){}
 
@@ -14,7 +19,7 @@ void Equations::Postfix::toInfix()
         cache = rpneq[i];
         this->makeEquation(cache);
     }
-    this->result = this->buffer.top();
+    this->result = this->buffer.top() + ")";
     this->buffer.pop();
 }
 
@@ -26,6 +31,8 @@ void Equations::Postfix::makeEquation(std::string cache)
     {
         if (this->isSign(this->buffer.top()) || (!this->isSign(this->buffer.top()) && this->isSign(cache)))
         {
+            if (cache.length() > 1 && cache[0] == '(')
+                cache = cache + ")";
             this->buffer.push(cache);
         }
         else
@@ -37,8 +44,7 @@ void Equations::Postfix::makeEquation(std::string cache)
 
             equation = cache + sign + equation;
             if ((sign == "+" || sign == "-") && cache[0] != '(')
-                equation = "(" + equation + ")";
-            //std::cout << equation << "\n";
+                equation = "(" + equation;
             this->makeEquation(equation);
         }
     }

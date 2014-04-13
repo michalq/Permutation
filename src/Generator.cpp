@@ -30,8 +30,7 @@ Graph::Permutations *Graph::Generator::getPermutations()
 }
 
 /**
- * JESUS CHRIST! YOU NEED TO OPTIMIZE THESE METHODS BELOW!
- * ... but dont hurry
+ * I think that this method could be better, but now at least it's working ...
  */
 void Graph::Generator::init()
 {

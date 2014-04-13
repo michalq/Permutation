@@ -19,7 +19,6 @@ Permutation::Permutation(int amount)
     this->sign = 0;
     this->branchBegin = 1;
     this->setHigherBranch(new Permutation);
-    this->branchBegin = 1;
     for (int i = 1; i < this->amount; i++)
     {
         this->signs[i] = 0;
