@@ -33,6 +33,7 @@ Graph::Permutations *Graph::Determinant::getPermutations()
 Graph::Determinant *Graph::Determinant::generate()
 {
     this->rpnequation = "";
+    int cacheSign = this->getPermutation(0)->getSign();
 
     int amountOfLines = this->getPermutation(0)->getAmount();
     int amountOfPermutations = this->getPermutations()->getAmount();
@@ -43,6 +44,7 @@ Graph::Determinant *Graph::Determinant::generate()
     }
     for (int i = 0; i < amountOfPermutations; i++)
     {
+
         for (int j = this->getPermutation(i)->getBranchBegin(); j < amountOfLines; j++)
         {
             this->rpnequation += this->getPermutation(i)->getNode(j)->getName();
@@ -52,10 +54,18 @@ Graph::Determinant *Graph::Determinant::generate()
         for (int j = amountOfLines-2; j >= this->getPermutation(i + 1)->getBranchBegin(); j--)
         {
             this->rpnequation += '*';
-            if (cachePermutation->getBranchBegin() == j)
+            if ((cachePermutation->getBranchBegin() == j))
             {
-                this->rpnequation += this->getPermutation(i)->getNodeSign(j)?'-':'+';
                 cachePermutation = cachePermutation->getHigherBranch();
+
+                if (cacheSign == 1 && this->getPermutation(0)->getNode(j) == this->getPermutation(i)->getNode(j) && j==1)
+                {
+                    cacheSign = -1;
+                    continue;
+                }
+
+                this->rpnequation += this->getPermutation(i)->getNodeSign(j)?'-':'+';
+                //this->rpnequation += i==2?'x':'y';
             }
         }
     }
